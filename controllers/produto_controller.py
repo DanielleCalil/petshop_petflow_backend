@@ -19,11 +19,11 @@ def insert_produto(dados):
     cursor.close()
     conexao.close()
 
-def update_produto(id_produto, dados):
+def update_produto(idProduto, dados):
     conexao = conecta_banco()
     cursor = conexao.cursor()
     comando = "update Produto set nome=%s, categoria=%s, preco=%s, estoque=%s where id_produto=%s"
-    valores = (dados.get('nome'), dados.get('categoria'), dados.get('preco'), dados.get('estoque'), id_produto)
+    valores = (dados.get('nome'), dados.get('categoria'), dados.get('preco'), dados.get('estoque'), idProduto)
     cursor.execute(comando, valores)
     conexao.commit()
     cursor.close()

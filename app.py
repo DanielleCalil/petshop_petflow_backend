@@ -2,19 +2,23 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from controllers import (
     cliente_controller, pet_controller, agendamento_controller,
-    produto_controller, servico_controller, venda_controller, usuario_controller
+    produto_controller, servico_controller, venda_controller, usuario_controller, dashboard_controller
 )
 
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/api/login', methods=['POST'])
-def app_login():
+@app.route('/api/dashboard', methods=['GET'])
+def app_dashboard():
+    return jsonify(dashboard_controller.get_stats())
+
+@app.route('/api/usuariosLogar', methods=['POST'])
+def app_login_legacy():
     dados = request.get_json()
     usuario = usuario_controller.autenticar_usuario(dados)
     if usuario:
-        return jsonify(usuario), 200
-    return jsonify({"message": "credenciais invalidas"}), 401
+        return jsonify({"sucesso": True, "dados": usuario}), 200
+    return jsonify({"sucesso": False, "message": "Erro de login"}), 401
 
 @app.route('/api/clientes', methods=['GET'])
 def app_select_clientes():
