@@ -1,5 +1,6 @@
 # Composer
 /vendor/
+.venv
 
 # Logs
 *.log
@@ -7,9 +8,6 @@
 # Environment files
 .env
 .env.*
-
-# PHPUnit
-.phpunit.result.cache
 
 # IDEs
 /.idea/
