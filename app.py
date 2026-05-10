@@ -8,6 +8,15 @@ from controllers import (
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/api/vendas/<int:id>', methods=['PUT'])
+def app_update_venda(id):
+    venda_controller.update_venda(id, request.get_json())
+    return jsonify({"message": "sucesso"}), 200
+
+@app.route('/api/vendas/<int:id>', methods=['GET'])
+def app_get_venda(id):
+    return jsonify(venda_controller.select_venda_por_id(id))
+
 @app.route('/api/dashboard', methods=['GET'])
 def app_dashboard():
     return jsonify(dashboard_controller.get_stats())
