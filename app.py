@@ -8,6 +8,24 @@ from controllers import (
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/api/usuariosLogar', methods=['POST'])
+def app_login():
+    dados = request.get_json()
+    usuario = usuario_controller.autenticar_usuario(dados)
+    
+    if usuario:
+        return jsonify({
+            "sucesso": True,
+            "mensagem": "Login realizado com sucesso",
+            "dados": usuario
+        }), 200
+    else:
+        return jsonify({
+            "sucesso": False,
+            "mensagem": "Usuário ou senha inválidos",
+            "dados": None
+        }), 401
+
 @app.route('/api/vendas/<int:id>', methods=['PUT'])
 def app_update_venda(id):
     venda_controller.update_venda(id, request.get_json())
