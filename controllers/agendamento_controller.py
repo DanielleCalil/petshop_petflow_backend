@@ -17,7 +17,7 @@ def select_agendamentos():
         from Agendamento a
         join Pet p on a.id_pet = p.id_pet
         join Cliente c on p.id_cliente = c.id_cliente
-        join Servico s on a.id_servico = s.id_servico
+        left join Servico s on a.id_servico = s.id_servico
     """
     cursor.execute(comando)
     resultados = cursor.fetchall()
